@@ -4,14 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Archived Website</title>
-    <link rel="stylesheet" href="styles.css">
     <style>
-        /* Additional styles for archived look */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
             margin: 0;
             padding: 0;
+            background-color: #f9f9f9;
         }
 
         .container {
@@ -20,24 +18,54 @@
             padding: 20px;
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         header h1 {
             font-size: 36px;
             color: #333;
-            text-align: center;
-            margin-bottom: 20px;
+            margin: 0;
         }
 
         #main-content {
             text-align: center;
+            padding: 20px 0;
+            animation: slideIn 0.5s ease-in-out;
         }
 
         #main-content p {
             font-size: 18px;
             color: #555;
             line-height: 1.6;
-            margin-bottom: 30px;
         }
 
         footer {
@@ -46,26 +74,27 @@
             color: #fff;
             padding: 10px 0;
             margin-top: 20px;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            animation: fadeIn 0.5s ease-in-out;
         }
     </style>
 </head>
 <body>
 
-<header>
-    <div class="container">
-        <h1>Archived</h1>
-    </div>
-</header>
+<div class="container">
+    <header>
+        <h1>Archived Website</h1>
+    </header>
 
-<section id="main-content">
-    <div class="container">
-        <p>Website archived for the moment.</p>
-    </div>
-</section>
+    <section id="main-content">
+        <p>This is an archived website for now.</p>
+    </section>
+</div>
 
 <footer>
     <div class="container">
-        <p>Please note: this website may come back</p>
+        <p>Archived website.</p>
     </div>
 </footer>
 
