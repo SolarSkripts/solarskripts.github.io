@@ -9,35 +9,16 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #071e3d; /* Dark blue */
+      background-color: #000; /* Black background */
       color: #fff;
       text-align: center;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       height: 100vh;
       overflow: hidden;
     }
-    .robot-container {
+    .binoculars {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      animation: float 5s infinite alternate;
-    }
-    .robot {
       width: 200px;
-      animation: move 5s infinite alternate;
-    }
-    .space-background {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-image: url('https://i.imgur.com/Q6uca2t.jpg'); /* Space background image */
-      background-size: cover;
-      background-position: center;
-      filter: blur(2px); /* Blur the background for depth */
-      z-index: -1;
+      z-index: 1;
     }
     .message {
       margin-top: 20px;
@@ -56,39 +37,79 @@
     .btn:hover {
       background-color: #45a049; /* Darker green on hover */
     }
-    @keyframes float {
-      0% {
-        transform: translate(-50%, -50%);
-      }
-      50% {
-        transform: translate(-50%, -55%);
-      }
-      100% {
-        transform: translate(-50%, -50%);
-      }
+    .galaxy {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
     }
-    @keyframes move {
-      0% {
-        transform: translateX(-5px) rotate(-5deg);
-      }
-      50% {
-        transform: translateX(5px) rotate(5deg);
-      }
-      100% {
-        transform: translateX(-5px) rotate(-5deg);
-      }
+    .star {
+      position: absolute;
+      background-color: #fff;
+      border-radius: 50%;
+      animation: twinkle 2s infinite;
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
     }
   </style>
 </head>
 <body>
-  <div class="robot-container">
-    <div class="space-background"></div>
-    <img src="https://i.imgur.com/z8W4P8J.png" alt="Lost Robot" class="robot">
+  <!-- Galaxy background -->
+  <div class="galaxy">
+    <!-- Generate stars dynamically -->
+    <script>
+      for (let i = 0; i < 50; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.width = Math.random() * 3 + 'px';
+        star.style.height = star.style.width;
+        star.style.left = Math.random() * 100 + 'vw';
+        star.style.top = Math.random() * 100 + 'vh';
+        document.body.appendChild(star);
+      }
+    </script>
   </div>
+
+  <!-- Binoculars image -->
+  <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/be02a4e3-e357-4bde-b048-3a8a59e11d49/d2ft78m-e3f1a28c-2021-4bbb-b092-6f3e731d974d.png/v1/fill/w_1010,h_791/binoculars_transparent_png_by_absurdwordpreferred_d2ft78m-pre.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9Mjc5NCIsInBhdGgiOiJcL2ZcL2JlMDJhNGUzLWUzNTctNGJkZS1iMDQ4LTNhOGE1OWUxMWQ0OVwvZDJmdDc4bS1lM2YxYTI4Yy0yMDIxLTRiYmItYjA5Mi02ZjNlNzMxZDk3NGQucG5nIiwid2lkdGgiOiI8PTM1NjYifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.4xDhAiwyS3SBbVUvSQerZw9vp_yN2EhIM5ipB6SUMBw" alt="Lost Robot" class="binoculars" id="binoculars">
+
+  <!-- Message -->
   <div class="message">
     <h1>404 Error: Page Not Found</h1>
     <p>Uh-oh! It seems like you've taken a wrong turn. Don't worry, even the best explorers get lost sometimes.</p>
     <p>But don't worry, I've got your back! Click <a href="/" class="btn">here</a> to get back home.</p>
   </div>
+
+  <!-- JavaScript to move the binoculars -->
+  <script>
+    const binoculars = document.getElementById('binoculars');
+    const maxX = window.innerWidth - binoculars.clientWidth;
+    const maxY = window.innerHeight - binoculars.clientHeight;
+    let dx = 2;
+    let dy = 2;
+
+    function moveBinoculars() {
+      let x = binoculars.offsetLeft + dx;
+      let y = binoculars.offsetTop + dy;
+      
+      if (x < 0 || x > maxX) {
+        dx = -dx;
+        x += dx * 2;
+      }
+      if (y < 0 || y > maxY) {
+        dy = -dy;
+        y += dy * 2;
+      }
+
+      binoculars.style.left = x + 'px';
+      binoculars.style.top = y + 'px';
+    }
+
+    setInterval(moveBinoculars, 10);
+  </script>
 </body>
 </html>
